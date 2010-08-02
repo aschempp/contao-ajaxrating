@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Andreas Schempp 2008-2010
+ * @copyright  Andreas Schempp 2010
  * @author     Andreas Schempp <andreas@schempp.ch>
  * @license    http://opensource.org/licenses/lgpl-3.0.html
  * @version    $Id$
@@ -29,12 +29,7 @@
 
 
 /**
- * Miscellaneous
+ * Extension folder
  */
-$GLOBALS['TL_LANG']['MSC']['valueOutOf'] = '%s von %s Stimmen';
-
-$GLOBALS['TL_LANG']['MSC']['ratingModes']['both']		= 'bewerten + ansehen';
-$GLOBALS['TL_LANG']['MSC']['ratingModes']['static']		= 'nur ansehen';
-$GLOBALS['TL_LANG']['MSC']['ratingModes']['rate']		= 'nur bewerten';
-$GLOBALS['TL_LANG']['MSC']['ratingModes']['none']		= 'deaktiviert';
+$GLOBALS['TL_LANG']['MOD']['ajaxrating'] = array('Feldtyp AjaxRating');
 

@@ -12,30 +12,28 @@ See readme.txt for full credit details.
 	border-bottom:1px solid #999;
 	padding-bottom:8px;
 	margin-bottom:8px;
-	}
+}
 
 .loading {
 	height: 30px;
 	background: url('working.gif') 50% 50% no-repeat;
-	}
+}
 	
-.unit-rating { /* the UL */
+.unit-rating {
 	list-style:none;
 	margin: 0px;
 	padding:0px;
 	height: 30px;
 	position: relative;
 	background: url('starrating.gif') top left repeat-x;		
-	}
+}
 
 .unit-rating li{
     text-indent: -90000px;
 	padding:0px;
 	margin:0px;
-	/*\*/
 	float: left;
-	/* */
-	}
+}
 	
 .unit-rating li a {
 	outline: none;
@@ -47,13 +45,13 @@ See readme.txt for full credit details.
 	z-index: 20;
 	position: absolute;
 	padding: 0px;
-	}
+}
 	
 .unit-rating li a:hover{
 	background: url('starrating.gif') left center;
 	z-index: 2;
 	left: 0px;
-	}
+}
 
 .unit-rating a.r1-unit{left: 0px;}
 .unit-rating a.r1-unit:hover{width:30px;}
@@ -83,7 +81,7 @@ See readme.txt for full credit details.
 	display: block;
 	text-indent: -9000px;
 	z-index: 1;
-	}
+}
 
 .voted {color:#999;}
 .thanks {color:#36AA3D;}

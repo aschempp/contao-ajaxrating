@@ -54,6 +54,11 @@ class FormAjaxRating extends Widget
 		
 		$this->import('Database');
 		$this->import('FrontendUser', 'User');
+		
+		if ($this->strName == '')
+		{
+			$this->strName = 'ajaxrating_'.rand(0,1000);
+		}
 	}
 	
 	
@@ -189,9 +194,8 @@ window.addEvent('domready', function()
 		if ($this->ratingMode == 'static' || $this->ratingMode == 'none')
 			return false;
 		
-		$arrCookie = deserialize($this->Input->cookie('ajaxrating'), true);
-		
 		// Cookie is set
+		$arrCookie = deserialize($this->Input->cookie('ajaxrating'), true);
 		if (is_array($arrCookie[$this->fromTable]) && in_array($this->pid, $arrCookie[$this->fromTable]))
 			return false;
 		

@@ -33,3 +33,13 @@ CREATE TABLE `tl_module` (
   `ratingMode` varchar(8) NOT NULL default '',
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+-- 
+-- Table `tl_content`
+-- 
+
+CREATE TABLE `tl_content` (
+  `ratingMode` varchar(8) NOT NULL default '',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+

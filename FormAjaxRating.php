@@ -54,11 +54,6 @@ class FormAjaxRating extends Widget
 		
 		$this->import('Database');
 		$this->import('FrontendUser', 'User');
-		
-		if ($this->strName == '')
-		{
-			$this->strName = 'ajaxrating_'.rand(0,1000);
-		}
 	}
 	
 	
@@ -111,7 +106,7 @@ class FormAjaxRating extends Widget
 		}
 		elseif (!$this->varValue)
 		{
-			$this->varValue = $this->Database->execute("SELECT AVG(rating) FROM tl_ajaxrating WHERE fromTable='{$this->fromTable}' AND pid={$this->pid}")->rating;
+			$this->varValue = $this->Database->execute("SELECT AVG(rating) AS rating FROM tl_ajaxrating WHERE fromTable='{$this->fromTable}' AND pid={$this->pid}")->rating;
 		}
 		
 		$GLOBALS['TL_CSS']['rating'] = 'system/modules/ajaxrating/html/rating.css';
@@ -172,15 +167,33 @@ window.addEvent('domready', function()
 	{
 		if ($this->Input->get('rating') && $this->canVote())
 		{
+			$intRating = $this->Input->get('rating');
+			
+			// Make sure rating is not higher than allowed
+			if ($intRating > $this->size)
+				$intRating = $this->size;
+			
 			$this->Database->prepare("INSERT INTO tl_ajaxrating (pid, tstamp, fromTable, ipaddress, member, rating) VALUES (?, ?, ?, ?, ?, ?)")
-						   ->execute($this->pid, time(), $this->fromTable, $this->Environment->ip, ($this->User->id ? $this->User->id : 0), $this->Input->get('rating'));
+						   ->execute($this->pid, time(), $this->fromTable, $this->Environment->ip, ($this->User->id ? $this->User->id : 0), $intRating);
 						   
 			$arrCookie = deserialize($this->Input->cookie('ajaxrating'), true);
 			$arrCookie[$this->fromTable][] = $this->pid;
 			$this->setCookie('ajaxrating', serialize($arrCookie), strtotime('+10 years'));
 		}
 		
-		return $this->Database->execute("SELECT AVG(rating) AS rating FROM tl_ajaxrating WHERE fromTable='{$this->fromTable}' AND pid={$this->pid}")->rating;
+		$intRating = $this->Database->execute("SELECT AVG(rating) AS rating FROM tl_ajaxrating WHERE fromTable='{$this->fromTable}' AND pid={$this->pid}")->rating;
+		
+		// HOOK: add custom logic
+		if (isset($GLOBALS['TL_HOOKS']['ajaxRating']) && is_array($GLOBALS['TL_HOOKS']['ajaxRating']))
+		{
+			foreach ($GLOBALS['TL_HOOKS']['ajaxRating'] as $callback)
+			{
+				$this->import($callback[0]);
+				$this->$callback[0]->$callback[1]($intRating, $this->fromTable, $this->pid);
+			}
+		}
+		
+		return $intRating;
 	}
 	
 	

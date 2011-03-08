@@ -31,7 +31,7 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['valueOutOf'] = '%s von %s Stimmen';
+$GLOBALS['TL_LANG']['MSC']['valueOutOf'] = '%s Punkte von %s Stimmen';
 
 $GLOBALS['TL_LANG']['MSC']['ratingModes']['both']		= 'bewerten + ansehen';
 $GLOBALS['TL_LANG']['MSC']['ratingModes']['static']		= 'nur ansehen';

@@ -109,7 +109,9 @@ class FormAjaxRating extends Widget
 		}
 		elseif (!$this->varValue)
 		{
-			$this->varValue = $this->Database->execute("SELECT AVG(rating) AS rating FROM tl_ajaxrating WHERE fromTable='{$this->fromTable}' AND pid={$this->pid}")->rating;
+			$objRating = $this->Database->execute("SELECT  COUNT(id) AS count, AVG(rating) AS rating FROM tl_ajaxrating WHERE fromTable='{$this->fromTable}' AND pid={$this->pid}");
+			$this->varValue = $objRating->rating;
+			$this->count = $objRating->count;
 		}
 		
 		$GLOBALS['TL_CSS']['rating'] = 'system/modules/ajaxrating/html/rating.css';
